@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: template
+  profiles:
+    active: prod
+server:
+  port: 9091
+logging:
+  path: log
+test: 123
