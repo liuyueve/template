@@ -26,7 +26,7 @@ do
         rm $outfile
     fi
     mkdir -p ../log/process_$((i+1)) && touch $outfile
-    java -jar ../lib/template*.jar --spring.config.location=../env --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) >>$outfile 2>&1 &((port = port +1))
+    java -jar ../lib/template*.jar --spring.config.location=file:../env --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) >>$outfile 2>&1 &((port = port +1))
 done
 
 echo "--------------------------------------------------------------------------------"
