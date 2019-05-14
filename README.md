@@ -10,7 +10,7 @@
 
 ## 启动脚本参数含义
 
---spring.config.location=file:../env    指定服务配置文件夹为env
+--spring.config.location=classpath:../env    指定服务配置文件夹为env
 
 --spring.profiles.active=${env}         指定服务环境，默认情况为prod
 
