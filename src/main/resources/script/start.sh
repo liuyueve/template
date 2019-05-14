@@ -13,7 +13,7 @@ then
     count=$2;
 fi
 
-echo "--------------------------------------------------------------------------------"
+echo "**************************************************************************************"
 echo "Will start server at Environment [${env}] Instance Count [${count}]"
 mkdir -p ../log
 
@@ -26,7 +26,15 @@ do
         rm $outfile
     fi
     mkdir -p ../log/process_$((i+1)) && touch $outfile
-    java -jar ../lib/template*.jar --spring.config.location=file:../env --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) >>$outfile 2>&1 &((port = port +1))
+    java -jar ../lib/template*.jar --spring.config.location=classpath:../env --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) >>$outfile 2>&1 &((port = port +1))
 done
 
-echo "--------------------------------------------------------------------------------"
+for((i=0;i<10;i++))
+do
+    echo -ne "."
+    sleep 2
+done
+
+cat ../log/process_*/process.log
+
+echo "**************************************************************************************"
