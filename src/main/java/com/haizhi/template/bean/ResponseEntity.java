@@ -16,4 +16,12 @@ public class ResponseEntity<T> {
 
     private T body;
 
+    public ResponseEntity(){}
+
+    public ResponseEntity(T t){
+        this.body = t;
+        this.code = 0;
+        this.message = "success!";
+    }
+
 }

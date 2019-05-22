@@ -75,7 +75,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <outputDirectory>${basedir}/target/lib</outputDirectory>
+                    <outputDirectory>${basedir}/target/${project.name}/lib</outputDirectory>
+                    <!--将本地jar写入到jar中-->
+                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
             </plugin>
             <plugin>
@@ -95,7 +97,7 @@
             <!--打包的时候将配置文件复制到env文件夹下，方便直接在服务器修改配置文件-->
             <resource>
                 <directory>src/main/resources/config</directory>
-                <targetPath>../env</targetPath>
+                <targetPath>../${project.name}/env</targetPath>
                 <includes>
                     <include>*.yml</include>
                 </includes>
@@ -103,7 +105,7 @@
             <!--打包的时候将脚本文件复制到bin文件夹下-->
             <resource>
                 <directory>src/main/resources/script</directory>
-                <targetPath>../bin</targetPath>
+                <targetPath>../${project.name}/bin</targetPath>
                 <includes>
                     <include>*.sh</include>
                 </includes>

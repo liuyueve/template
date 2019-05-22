@@ -13,8 +13,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
  * Date is 2019-05-12
  * Description is :定制定时任务线程池线程数量
  */
-@EnableScheduling
 @Configuration
+@EnableScheduling
 public class ScheduleConfiguration {
 
     /**
@@ -28,3 +28,4 @@ public class ScheduleConfiguration {
     }
 
 }
+

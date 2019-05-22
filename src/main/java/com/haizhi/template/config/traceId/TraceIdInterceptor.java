@@ -20,9 +20,13 @@ public class TraceIdInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String traceId = UUIDUtils.randomUUID();
+        String traceId = getTraceId(request);
         MDC.put(Constant.TRACEID, traceId);
         response.addHeader(Constant.TRACEID,traceId);
         return true;
+    }
+
+    private String getTraceId(HttpServletRequest request){
+        return String.format("%s - %s",request.getRequestURI(),UUIDUtils.randomUUID());
     }
 }

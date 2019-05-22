@@ -1,5 +1,7 @@
 package com.haizhi.template.config.async;
 
+import com.haizhi.template.utils.ThreadMdcUtils;
+import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -16,15 +18,24 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableAsync
 @Configuration
 public class AsyncConfiguration {
-    @Bean("taskExecutor")
+
+    @Bean
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(10);
-        executor.setMaxPoolSize(20);
+        //设置核心线程数量
+        executor.setCorePoolSize(1);
+        //设置最大线程数量
+        executor.setMaxPoolSize(1);
+        //设置队列最大长度
         executor.setQueueCapacity(200);
+        //设置线程空闲时间
         executor.setKeepAliveSeconds(60);
+        //设置线程前缀
         executor.setThreadNamePrefix("async-");
+        //设置拒绝策略
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        //设置线程装饰器
+        executor.setTaskDecorator(runnable -> ThreadMdcUtils.wrap(runnable, MDC.getCopyOfContextMap()));
         return executor;
     }
 }

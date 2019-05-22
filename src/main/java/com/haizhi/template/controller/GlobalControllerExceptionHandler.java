@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,14 +29,30 @@ public class GlobalControllerExceptionHandler {
     public ResponseEntity<List<String>> paramValidate(MethodArgumentNotValidException e){
         ResponseEntity<List<String>> entity = new ResponseEntity<>();
         entity.setCode(-1);
-        List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
-        if(allErrors.size()<=0){
-            entity.setMessage("system exception!");
-        }
-        List<String> collect = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-        entity.setMessage(Strings.join(collect,';'));
-        entity.setBody(collect);
+        List<String> collect = e.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
+        joinValidMessage(entity,collect);
         return entity;
+    }
+
+    /**
+     * 处理除了controller入口外，其余的逻辑@Valid校验异常
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<List<String>> valid(ConstraintViolationException e){
+        ResponseEntity<List<String>> entity = new ResponseEntity<>();
+        entity.setCode(-1);
+        List<String> collect = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
+        joinValidMessage(entity,collect);
+        return entity;
+    }
+
+    private void joinValidMessage(ResponseEntity<List<String>> entity,List<String> list){
+        if(list.size()<=0){
+            entity.setMessage("system exception!");
+        }else {
+            entity.setMessage(Strings.join(list,';'));
+            entity.setBody(list);
+        }
     }
 
     /**
