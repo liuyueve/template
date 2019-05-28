@@ -16,4 +16,5 @@ import org.springframework.validation.annotation.Validated;
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
 
+
 }

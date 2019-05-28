@@ -23,19 +23,19 @@ public class AsyncConfiguration {
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //设置核心线程数量
-        executor.setCorePoolSize(1);
+        executor.setCorePoolSize(4);
         //设置最大线程数量
-        executor.setMaxPoolSize(1);
+        executor.setMaxPoolSize(8);
         //设置队列最大长度
-        executor.setQueueCapacity(200);
+        executor.setQueueCapacity(2000);
         //设置线程空闲时间
-        executor.setKeepAliveSeconds(60);
+        executor.setKeepAliveSeconds(10);
         //设置线程前缀
         executor.setThreadNamePrefix("async-");
         //设置拒绝策略
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         //设置线程装饰器
-        executor.setTaskDecorator(runnable -> ThreadMdcUtils.wrap(runnable, MDC.getCopyOfContextMap()));
+        executor.setTaskDecorator(runnable -> ThreadMdcUtils.wrapAsync(runnable, MDC.getCopyOfContextMap()));
         return executor;
     }
 }

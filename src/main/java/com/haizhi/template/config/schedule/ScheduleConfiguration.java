@@ -1,12 +1,15 @@
 package com.haizhi.template.config.schedule;
 
+import com.haizhi.template.utils.ThreadMdcUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Create by liuyu
@@ -24,7 +27,26 @@ public class ScheduleConfiguration {
      */
     @Bean
     public TaskScheduler schedule(){
-        return new ConcurrentTaskScheduler(new ScheduledThreadPoolExecutor(2));
+        return new ConcurrentTaskScheduler(getTraceIdSchedule());
+    }
+
+    private ScheduledThreadPoolExecutor getTraceIdSchedule(){
+        return new ScheduledThreadPoolExecutor(2) {
+            @Override
+            public ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) {
+                return super.schedule(ThreadMdcUtils.wrapSchedule(command), delay, unit);
+            }
+
+            @Override
+            public ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) {
+                return super.scheduleAtFixedRate(ThreadMdcUtils.wrapSchedule(command), initialDelay, period, unit);
+            }
+
+            @Override
+            public ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit) {
+                return super.scheduleWithFixedDelay(ThreadMdcUtils.wrapSchedule(command), initialDelay, delay, unit);
+            }
+        };
     }
 
 }

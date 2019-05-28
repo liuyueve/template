@@ -8,6 +8,6 @@ package com.haizhi.template.config;
 public class Constant {
 
     //日志请求的追踪id
-    public static final String TRACEID = "traceId";
+    public static final String TraceId = "traceId";
 
 }

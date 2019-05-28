@@ -12,21 +12,32 @@ import java.util.Map;
  */
 public class ThreadMdcUtils {
 
-    public static Runnable wrap(Runnable task, Map<String,String> context){
+    public static Runnable wrapAsync(Runnable task, Map<String,String> context){
         return () -> {
             if(context==null){
                 MDC.clear();
             }else {
                 MDC.setContextMap(context);
             }
-            if(MDC.get(Constant.TRACEID)==null){
-                MDC.put(Constant.TRACEID,UUIDUtils.randomUUID());
+            if(MDC.get(Constant.TraceId)==null){
+                MDC.put(Constant.TraceId,UUIDUtils.randomUUID());
             }
             try {
                 task.run();
             }finally {
                 MDC.clear();
             }
+        };
+    }
+
+    public static Runnable wrapSchedule(Runnable task){
+        return ()->{
+          MDC.put(Constant.TraceId,UUIDUtils.randomUUID());
+          try {
+              task.run();
+          }finally {
+              MDC.clear();
+          }
         };
     }
 }

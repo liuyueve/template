@@ -1,18 +1,8 @@
 #!/usr/bin/env bash
 port=8080
-env="prod"
-count=1
+env=${1:-prod}
+count=${2:-1}
 server="template"
-
-if [[ x$1 != "x" ]];
-then
-    env=$1;
-fi
-
-if [[ y$2 != "y" ]];
-then
-    count=$2;
-fi
 
 echo "**************************************************************************************"
 echo "Will start server at Environment [${env}] Instance Count [${count}]"
@@ -22,12 +12,12 @@ for (( i = 0; i < $count; i++ ))
 do
     echo "Start ${server} server instance [$((i+1))] for [$env] at port [$port]..."
     outfile="../log/process_$((i+1))/process.log"
-    if [[ -f $outfile ]]
+    if [[ -f ${outfile} ]]
     then
-        rm $outfile
+        rm ${outfile}
     fi
-    mkdir -p ../log/process_$((i+1)) && touch $outfile
-    java -jar ../lib/${server}*.jar --spring.config.location=file:../env/ --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) --server.port=${port}>>$outfile 2>&1 &((port = port +1))
+    mkdir -p ../log/process_$((i+1)) && touch ${outfile}
+    java -jar ../lib/${server}*.jar --spring.config.location=file:../env/ --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) --server.port=${port}>>${outfile} 2>&1 &((port = port +1))
 done
 
 for((i=0;i<10;i++))
