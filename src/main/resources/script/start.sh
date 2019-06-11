@@ -17,7 +17,7 @@ do
         rm ${outfile}
     fi
     mkdir -p ../log/process_$((i+1)) && touch ${outfile}
-    java -jar ../lib/${server}*.jar --spring.config.location=file:../env/ --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) --server.port=${port}>>${outfile} 2>&1 &((port = port +1))
+    java -jar ../lib/${server}*.jar --spring.config.location=file:../env/ --spring.profiles.active=${env} --logging.path=../log/process_$((i+1)) --server.port=${port} --pid=${i}>>${outfile} 2>&1 &((port = port +1))
 done
 
 for((i=0;i<10;i++))
