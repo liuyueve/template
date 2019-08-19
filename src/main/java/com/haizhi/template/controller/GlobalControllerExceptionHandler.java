@@ -1,6 +1,6 @@
 package com.haizhi.template.controller;
 
-import com.haizhi.template.bean.ResponseEntity;
+import com.haizhi.template.bean.ResultEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.validation.ObjectError;
@@ -26,8 +26,8 @@ public class GlobalControllerExceptionHandler {
      * 处理rest请求参数校验失败的异常
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<List<String>> paramValidate(MethodArgumentNotValidException e){
-        ResponseEntity<List<String>> entity = new ResponseEntity<>();
+    public ResultEntity<List<String>> paramValidate(MethodArgumentNotValidException e){
+        ResultEntity<List<String>> entity = new ResultEntity<>();
         entity.setCode(-1);
         List<String> collect = e.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
         joinValidMessage(entity,collect);
@@ -38,15 +38,15 @@ public class GlobalControllerExceptionHandler {
      * 处理除了controller入口外，其余的逻辑@Valid校验异常
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<List<String>> valid(ConstraintViolationException e){
-        ResponseEntity<List<String>> entity = new ResponseEntity<>();
+    public ResultEntity<List<String>> valid(ConstraintViolationException e){
+        ResultEntity<List<String>> entity = new ResultEntity<>();
         entity.setCode(-1);
         List<String> collect = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
         joinValidMessage(entity,collect);
         return entity;
     }
 
-    private void joinValidMessage(ResponseEntity<List<String>> entity,List<String> list){
+    private void joinValidMessage(ResultEntity<List<String>> entity, List<String> list){
         if(list.size()<=0){
             entity.setMessage("system exception!");
         }else {
@@ -60,9 +60,9 @@ public class GlobalControllerExceptionHandler {
      * （异常尽量定制处理，慎用Exception来捕捉）
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Exception> exception(Exception e){
+    public ResultEntity<Exception> exception(Exception e){
         log.error("system exception!",e);
-        ResponseEntity<Exception> entity = new ResponseEntity<>();
+        ResultEntity<Exception> entity = new ResultEntity<>();
         entity.setCode(-1);
         entity.setMessage("system exception!");
         entity.setBody(e);

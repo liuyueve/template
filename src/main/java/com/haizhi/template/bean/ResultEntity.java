@@ -8,7 +8,7 @@ import lombok.Data;
  * Description is : rest接口返回通用包装类
  */
 @Data
-public class ResponseEntity<T> {
+public class ResultEntity<T> {
 
     private int code;
 
@@ -16,9 +16,9 @@ public class ResponseEntity<T> {
 
     private T body;
 
-    public ResponseEntity(){}
+    public ResultEntity(){}
 
-    public ResponseEntity(T t){
+    public ResultEntity(T t){
         this.body = t;
         this.code = 0;
         this.message = "success!";
