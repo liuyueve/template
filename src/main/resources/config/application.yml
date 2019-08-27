@@ -8,3 +8,10 @@ server:
 logging:
   path: log
 app:
+  async:
+    corePoolSize: 4
+    maxPoolSize: 8
+    queueCapacity: 2000
+    keepLiveSeconds: 10
+  schedule:
+    corePoolSize: 2

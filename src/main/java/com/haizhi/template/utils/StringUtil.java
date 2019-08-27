@@ -1,4 +1,4 @@
-package com.haizhi.template;
+package com.haizhi.template.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

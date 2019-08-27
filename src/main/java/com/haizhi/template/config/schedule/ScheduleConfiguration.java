@@ -1,6 +1,8 @@
 package com.haizhi.template.config.schedule;
 
+import com.haizhi.template.AppConfig;
 import com.haizhi.template.utils.ThreadMdcUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
@@ -20,6 +22,9 @@ import java.util.concurrent.TimeUnit;
 @EnableScheduling
 public class ScheduleConfiguration {
 
+    @Autowired
+    private AppConfig config;
+
     /**
      * 根据自己定时任务的数量，制定对于的线程池数量
      * 避免每个定时任务之间相互干扰
@@ -31,7 +36,7 @@ public class ScheduleConfiguration {
     }
 
     private ScheduledThreadPoolExecutor getTraceIdSchedule(){
-        return new ScheduledThreadPoolExecutor(2) {
+        return new ScheduledThreadPoolExecutor(config.getSchedule().getCorePoolSize()) {
             @Override
             public ScheduledFuture<?> schedule(Runnable command, long delay, TimeUnit unit) {
                 return super.schedule(ThreadMdcUtils.wrapSchedule(command), delay, unit);
