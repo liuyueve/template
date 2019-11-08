@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    druid:
+      username: root
+      password: 12345
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/liuyu?useUnicode=true&characterEncoding=UTF-8
+#      initial-size: 4
+#      max-active: 8
+#      validation-query: select 1 from dual;
+#      test-on-borrow: false
+#      test-while-idle: true
+#      time-between-eviction-runs-millis: 10000
+#      use-unfair-lock: true
+#      max-wait: 5000
+#      query-timeout: 5000
+#      web-stat-servlet:
+#        enabled: true
+#      stat-view-servlet:
+#        enabled: true
+#        login-username: liuyu
+#        login-password: 12345
+#      servlet:
+#        stat:
+#          enabled: true
+#          merge-sql: true
+#          slow-sql-millis: -1
+#          log-slow-sql: true
+      #        slf4j:
+      #          enabled: true
+      #          result-set-log-enabled: false
+      #          connection-log-enabled: false
+      #          data-source-log-enabled: false
+      #          statement-log-enabled: false
+      #          statement-executable-sql-log-enable: true
+#      remove-abandoned: true
+#      remove-abandoned-timeout: 30
+logging:
+  config: classpath:config/logback-spring-dev.xml

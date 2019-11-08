@@ -1,4 +1,4 @@
-package com.haizhi.template.config.traceId;
+package com.haizhi.template.config.interceptor.handle;
 
 import com.haizhi.template.config.Constant;
 import com.haizhi.template.utils.UUIDUtils;

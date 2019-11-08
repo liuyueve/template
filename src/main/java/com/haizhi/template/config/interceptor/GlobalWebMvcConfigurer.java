@@ -1,12 +1,11 @@
-package com.haizhi.template.config;
+package com.haizhi.template.config.interceptor;
 
+import com.haizhi.template.config.interceptor.handle.TraceIdInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.List;
 
 /**
  * Create by liuyu
@@ -16,15 +15,15 @@ import java.util.List;
 @Component
 public class GlobalWebMvcConfigurer implements WebMvcConfigurer {
 
-    @Autowired(required = false)
-    private List<HandlerInterceptor> interceptors;
+    @Autowired
+    private TraceIdInterceptor traceIdInterceptor;
 
     @Override
+    /*
+      traceId 拦截器需要在最开始执行
+     */
     public void addInterceptors(InterceptorRegistry registry) {
-        if (interceptors != null && interceptors.size() > 0) {
-            for (HandlerInterceptor interceptor : interceptors) {
-                registry.addInterceptor(interceptor);
-            }
-        }
+        registry.addInterceptor(traceIdInterceptor).order(0);
     }
+
 }

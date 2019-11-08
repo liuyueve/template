@@ -30,7 +30,7 @@ public class ScheduleConfiguration {
      * 避免每个定时任务之间相互干扰
      * @return
      */
-    @Bean
+    @Bean("schedule")
     public TaskScheduler schedule(){
         return new ConcurrentTaskScheduler(getTraceIdSchedule());
     }

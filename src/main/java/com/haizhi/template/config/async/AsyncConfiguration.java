@@ -24,7 +24,7 @@ public class AsyncConfiguration {
     @Autowired
     private AppConfig config;
 
-    @Bean
+    @Bean("async")
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //设置核心线程数量

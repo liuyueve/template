@@ -59,13 +59,12 @@ public class GlobalControllerExceptionHandler {
      * 处理其余未捕捉到的异常
      * （异常尽量定制处理，慎用Exception来捕捉）
      */
-    @ExceptionHandler(Exception.class)
-    public ResultEntity<Exception> exception(Exception e){
+    @ExceptionHandler(Throwable.class)
+    public ResultEntity<Exception> exception(Throwable e){
         log.error("system exception!",e);
         ResultEntity<Exception> entity = new ResultEntity<>();
         entity.setCode(-1);
         entity.setMessage("system exception!");
-        entity.setBody(e);
         return entity;
     }
 
