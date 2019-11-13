@@ -13,11 +13,10 @@ import java.io.IOException;
  */
 @Slf4j
 @WebFilter
-public class NullFilter implements Filter {
+public class FirstFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("this is filter 1");
         chain.doFilter(request, response);
     }
 

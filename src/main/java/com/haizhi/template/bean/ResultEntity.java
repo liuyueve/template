@@ -12,16 +12,38 @@ public class ResultEntity<T> {
 
     private int code;
 
-    private String message;
+    private String msg;
 
-    private T body;
+    private T data;
 
     public ResultEntity(){}
 
-    public ResultEntity(T t){
-        this.body = t;
-        this.code = 0;
-        this.message = "success!";
+    public static class Builder<T>{
+
+        private ResultEntity<T> resultEntity;
+
+        public Builder(){
+            this.resultEntity = new ResultEntity<>();
+        }
+
+        public Builder<T> code(int code){
+            this.resultEntity.code = code;
+            return this;
+        }
+
+        public Builder<T> msg(String msg){
+            this.resultEntity.msg = msg;
+            return this;
+        }
+
+        public Builder<T> data(T data){
+            this.resultEntity.data = data;
+            return this;
+        }
+
+        public ResultEntity<T> build(){
+            return this.resultEntity;
+        }
     }
 
 }

@@ -13,9 +13,8 @@ import javax.servlet.http.HttpSessionListener;
  */
 @Slf4j
 @WebListener
-public class NullListener implements HttpSessionListener {
+public class EmptyListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("session create");
     }
 }
