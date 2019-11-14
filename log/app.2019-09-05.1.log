@@ -1,3 +1,0 @@
-2019-09-05 11:22:21.212 [INFO ] [] [main] com.haizhi.template.Application Starting Application on liuyus-MacBook-Pro.local with PID 1820 (/Users/liuyu/IdeaProjects/template/target/classes started by liuyu in /Users/liuyu/IdeaProjects/template)
-2019-09-05 11:22:21.213 [INFO ] [] [main] com.haizhi.template.Application The following profiles are active: prod
-2019-09-05 11:22:25.398 [INFO ] [] [main] com.haizhi.template.Application Started Application in 4.641 seconds (JVM running for 10.538)
