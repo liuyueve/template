@@ -17,7 +17,7 @@ import java.util.Set;
  * Date is 2019-09-07
  * Description is : 自定义null值全局修饰器
  */
-@Component
+//@Component
 public class NullSerializerModifier extends BeanSerializerModifier {
 
     @Autowired
