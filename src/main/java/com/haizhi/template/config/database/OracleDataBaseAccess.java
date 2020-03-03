@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
 
 import javax.sql.DataSource;
@@ -31,7 +32,7 @@ import java.util.List;
 
 @Slf4j
 //@Configuration
-@MapperScan(basePackages = "com.haizhi.template.mapper.oracle", sqlSessionTemplateRef = "OracleSqlSessionTemplate")
+@MapperScan(basePackages = "com.haizhi.template.mapper.oracle", sqlSessionTemplateRef = "oracleSqlSessionTemplate")
 public class OracleDataBaseAccess {
 
     @Bean("oracleMPConfig")

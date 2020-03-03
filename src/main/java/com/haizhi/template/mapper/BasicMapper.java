@@ -8,4 +8,4 @@ import org.springframework.stereotype.Repository;
  * Description is : mapper基础类
  */
 @Repository
-public interface BasicMapper{}
+public interface BasicMapper {}
