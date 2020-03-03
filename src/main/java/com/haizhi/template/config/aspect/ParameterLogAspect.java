@@ -29,7 +29,7 @@ import java.util.Map;
 @Slf4j
 @Aspect
 @Component
-public class ParameterLogConfig {
+public class ParameterLogAspect {
 
     @Pointcut(value = "@within(org.springframework.web.bind.annotation.RestController)")
     public void pointCut() {
@@ -79,10 +79,11 @@ public class ParameterLogConfig {
         Annotation[] annotations = parameter.getAnnotations();
         if (annotations != null && annotations.length > 0)
             for (Annotation annotation : annotations) {
-                if (annotation instanceof RequestParam
-                        || annotation instanceof RequestBody
-                        || annotation instanceof RequestHeader
-                        || annotation instanceof PathVariable) {
+                Class<? extends Annotation> type = annotation.annotationType();
+                if (type.isAssignableFrom(RequestParam.class)
+                        || type.isAssignableFrom(RequestBody.class)
+                        || type.isAssignableFrom(RequestHeader.class)
+                        || type.isAssignableFrom(PathVariable.class)) {
                     return true;
                 }
             }

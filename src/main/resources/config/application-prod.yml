@@ -4,7 +4,7 @@ spring:
       username: root
       password: 12345
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/liuyu?useUnicode=true&characterEncoding=UTF-8$useSSL=false&useTimezone=true&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://127.0.0.1:3306/liuyu?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useTimezone=true&serverTimezone=Asia/Shanghai
       # rewriteBatchedStatements=true 开启批处理
       #初始化时建立物理连接的个数
       initial-size: 4

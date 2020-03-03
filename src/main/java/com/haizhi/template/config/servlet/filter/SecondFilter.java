@@ -1,9 +1,8 @@
-package com.haizhi.template.config.servlet;
+package com.haizhi.template.config.servlet.filter;
 
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
@@ -12,8 +11,7 @@ import java.io.IOException;
  * Description is : 空filter，摆这儿做示范
  */
 @Slf4j
-@WebFilter
-public class FirstFilter implements Filter {
+public class SecondFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

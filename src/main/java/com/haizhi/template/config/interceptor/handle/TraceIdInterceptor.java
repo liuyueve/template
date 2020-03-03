@@ -27,6 +27,6 @@ public class TraceIdInterceptor extends HandlerInterceptorAdapter {
     }
 
     private String getTraceId(HttpServletRequest request){
-        return String.format("%s - %s",request.getRequestURI(),UUIDUtils.randomUUID());
+        return String.format("%s~%s",request.getRequestURI(),UUIDUtils.randomUUID());
     }
 }

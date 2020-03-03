@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_PATTERN"
-              value="%d{yyyy-MM-dd} %d{HH:mm:ss.SSS} [%-5level] [%X{traceId}] [%thread] %logger{36} %msg%n">
+              value="%d{yyyy-MM-dd} %d{HH:mm:ss.SSS}|%level|[%X{traceId}]|%thread|%logger{36}|%msg%n">
     </property>
 
     <!-- 按照每天生成日志文件，记录服务所有日志 -->

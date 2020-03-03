@@ -14,9 +14,17 @@ public class CustomServerException extends Exception {
 
     private String message;
 
+    private Object data;
+
     public CustomServerException(int code, String message){
         this.code = code;
         this.message = message;
+    }
+
+    public CustomServerException(int code, String message,Object data){
+        this.code = code;
+        this.message = message;
+        this.data = data;
     }
 
 }

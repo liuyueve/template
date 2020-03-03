@@ -1,6 +1,8 @@
 package com.haizhi.template.bean;
 
+import lombok.Builder;
 import lombok.Data;
+
 
 /**
  * Create by liuyu
@@ -8,6 +10,7 @@ import lombok.Data;
  * Description is : rest接口返回通用包装类
  */
 @Data
+@Builder
 public class ResultEntity<T> {
 
     private int code;
@@ -16,34 +19,12 @@ public class ResultEntity<T> {
 
     private T data;
 
-    public ResultEntity(){}
+    public static <V> ResultEntity<V> ok(V v) {
+        return ResultEntity.<V>builder().code(0).msg("success").data(v).build();
+    }
 
-    public static class Builder<T>{
-
-        private ResultEntity<T> resultEntity;
-
-        public Builder(){
-            this.resultEntity = new ResultEntity<>();
-        }
-
-        public Builder<T> code(int code){
-            this.resultEntity.code = code;
-            return this;
-        }
-
-        public Builder<T> msg(String msg){
-            this.resultEntity.msg = msg;
-            return this;
-        }
-
-        public Builder<T> data(T data){
-            this.resultEntity.data = data;
-            return this;
-        }
-
-        public ResultEntity<T> build(){
-            return this.resultEntity;
-        }
+    public static <V> ResultEntity<V> error(V v) {
+        return ResultEntity.<V>builder().code(-1).msg("failed").data(v).build();
     }
 
 }

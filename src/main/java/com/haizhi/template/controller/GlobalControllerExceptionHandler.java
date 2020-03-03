@@ -3,15 +3,13 @@ package com.haizhi.template.controller;
 import com.haizhi.template.bean.ResultEntity;
 import com.haizhi.template.bean.exception.CustomServerException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Strings;
-import org.springframework.validation.ObjectError;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +18,7 @@ import java.util.stream.Collectors;
  * Description is :controller层请求全局异常处理中心
  */
 @Slf4j
+@Validated
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
 
@@ -27,41 +26,28 @@ public class GlobalControllerExceptionHandler {
      * 处理rest请求参数校验失败的异常
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResultEntity<List<String>> paramValidate(MethodArgumentNotValidException e) {
-        ResultEntity<List<String>> entity = new ResultEntity<>();
-        entity.setCode(-1);
-        List<String> collect = e.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-        joinValidMessage(entity, collect);
-        return entity;
-    }
+    public ResultEntity<Map<String, String>> paramValidate(MethodArgumentNotValidException e) {
 
-    /**
-     * 处理除了controller入口外，其余的逻辑@Valid校验异常
-     */
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResultEntity<List<String>> valid(ConstraintViolationException e) {
-        ResultEntity<List<String>> entity = new ResultEntity<>();
-        entity.setCode(-1);
-        List<String> collect = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
-        joinValidMessage(entity, collect);
-        return entity;
-    }
+        Map<String, String> collect = e.getBindingResult()
+                                       .getFieldErrors()
+                                       .stream()
+                                       .collect(Collectors.toMap(FieldError::getField,
+                                               f -> f.getRejectedValue() + "~" + f.getDefaultMessage()));
 
-    private void joinValidMessage(ResultEntity<List<String>> entity, List<String> list) {
-        if (list.size() <= 0) {
-            entity.setMsg("system exception!");
-        } else {
-            entity.setMsg(Strings.join(list, ';'));
-            entity.setData(list);
-        }
+        return ResultEntity.<Map<String, String>>builder().code(-1)
+                                                          .msg("参数校验未通过")
+                                                          .data(collect)
+                                                          .build();
     }
 
     @ExceptionHandler(CustomServerException.class)
-    public ResultEntity<String> serverException(CustomServerException e) {
-        log.info("request error code [{}] msg[{}]",e.getCode(),e.getMessage());
-        return new ResultEntity.Builder<String>().code(e.getCode())
-                                                 .msg(e.getMessage())
-                                                 .build();
+    public ResultEntity<Object> serverException(CustomServerException e) {
+        log.info("request error code [{}] msg[{}]", e.getCode(), e.getMessage());
+        return ResultEntity.builder()
+                           .code(e.getCode())
+                           .msg(e.getMessage())
+                           .data(e.getData())
+                           .build();
     }
 
     /**
@@ -69,12 +55,11 @@ public class GlobalControllerExceptionHandler {
      * （异常尽量定制处理，慎用Exception来捕捉）
      */
     @ExceptionHandler(Throwable.class)
-    public ResultEntity<Exception> exception(Throwable e) {
+    public ResultEntity<String> exception(Throwable e) {
         log.error("system exception!", e);
-        ResultEntity<Exception> entity = new ResultEntity<>();
-        entity.setCode(-1);
-        entity.setMsg("system exception!");
-        return entity;
+        return ResultEntity.<String>builder().code(-1)
+                                             .msg("failed")
+                                             .build();
     }
 
 }

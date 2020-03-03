@@ -14,12 +14,11 @@ import java.util.Set;
  */
 public class ValidationUtils {
 
-    private static Validator validator = Validation
-            .byProvider(HibernateValidator.class)
-            .configure()
-            .failFast(false)
-            .buildValidatorFactory()
-            .getValidator();
+    private static Validator validator = Validation.byProvider(HibernateValidator.class)
+                                                   .configure()
+                                                   .failFast(false)
+                                                   .buildValidatorFactory()
+                                                   .getValidator();
 
 
     public static <T> void validate(T obj) {
