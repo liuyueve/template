@@ -1,7 +1,7 @@
-package com.haizhi.template.controller;
+package com.haizhi.template.config.exception.handler;
 
 import com.haizhi.template.bean.ResultEntity;
-import com.haizhi.template.bean.exception.CustomServerException;
+import com.haizhi.template.config.exception.CustomServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;

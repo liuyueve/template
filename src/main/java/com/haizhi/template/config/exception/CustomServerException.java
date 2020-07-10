@@ -1,9 +1,9 @@
-package com.haizhi.template.bean.exception;
+package com.haizhi.template.config.exception;
 
 import lombok.Data;
 
 /**
- * Create by liuyu
+ * Create by liu·yu
  * Date is 2019-11-13
  * Description is : 自定义异常，用于程序出错时抛出
  */

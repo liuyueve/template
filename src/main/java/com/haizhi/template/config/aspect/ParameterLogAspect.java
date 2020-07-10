@@ -1,5 +1,6 @@
 package com.haizhi.template.config.aspect;
 
+import com.haizhi.template.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Create by liuyu
+ * Create by liu·yu
  * Date is 2019-10-23
  * Description is : 使用aop记录每个请求的参数和返回值
  */
@@ -54,6 +55,7 @@ public class ParameterLogAspect {
             HttpServletResponse response = getResponse();
             if (response != null) {
                 response.addHeader("timeCost", timeCost + "ms");
+                response.addHeader("Date", DateUtils.getFormat_RFC5322());
             }
         }
         return proceed;

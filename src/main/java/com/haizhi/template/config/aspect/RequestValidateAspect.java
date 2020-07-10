@@ -1,6 +1,6 @@
 package com.haizhi.template.config.aspect;
 
-import com.haizhi.template.bean.exception.CustomServerException;
+import com.haizhi.template.config.exception.CustomServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
