@@ -55,7 +55,7 @@ public class ParameterLogAspect {
             HttpServletResponse response = getResponse();
             if (response != null) {
                 response.addHeader("timeCost", timeCost + "ms");
-                response.addHeader("Date", DateUtils.getFormat_RFC5322());
+                response.addHeader("Date", DateUtils.getRFC5322String());
             }
         }
         return proceed;

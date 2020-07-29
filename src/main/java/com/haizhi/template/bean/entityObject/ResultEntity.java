@@ -1,4 +1,4 @@
-package com.haizhi.template.bean;
+package com.haizhi.template.bean.entityObject;
 
 import lombok.Builder;
 import lombok.Data;

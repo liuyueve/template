@@ -1,6 +1,6 @@
 package com.haizhi.template.config.exception.handler;
 
-import com.haizhi.template.bean.ResultEntity;
+import com.haizhi.template.bean.entityObject.ResultEntity;
 import com.haizhi.template.config.exception.CustomServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.FieldError;
