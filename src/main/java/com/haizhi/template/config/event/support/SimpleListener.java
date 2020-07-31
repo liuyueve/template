@@ -1,6 +1,7 @@
 package com.haizhi.template.config.event.support;
 
 import com.haizhi.template.config.event.EventConfig;
+import org.springframework.core.ParameterizedTypeReference;
 
 /**
  * Create by liu·yu
@@ -14,20 +15,21 @@ public interface SimpleListener<T> {
     /**
      * 该监听器可接收的消息类型
      */
-    Class getMatchType();
+    @SuppressWarnings("unchecked")
+    default Class<T> getMatchType() {
+        ParameterizedTypeReference<T> typeReference = new ParameterizedTypeReference<T>() {
+        };
+        return (Class<T>) typeReference.getType();
+    }
 
     /**
      * 无状态接收
-     * @param t
-     * @throws Exception
      */
-    default void receive(T t) throws Exception {
+    default void receive(T t) {
     }
 
     /**
      * 有状态接收
-     * @param t
-     * @param state
      */
     default void receiveByState(T t, int state) {
     }

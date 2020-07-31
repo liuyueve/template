@@ -47,6 +47,7 @@ public class SimpleEventMulticaster {
 
     /**
      * 添加listener
+     *
      * @param listener 需要传播的事件
      */
     public void addListener(SimpleListener listener) {
@@ -56,6 +57,7 @@ public class SimpleEventMulticaster {
 
     /**
      * 同步，无状态传播
+     *
      * @param object 需要传播的事件
      */
     public void syncMulticast(Object object) {
@@ -70,8 +72,9 @@ public class SimpleEventMulticaster {
 
     /**
      * 同步，有状态传播
+     *
      * @param object 需要传播的消息
-     * @param state 状态码
+     * @param state  状态码
      */
     public void syncMulticastWithState(Object object, int state) {
         List<SimpleListener> listeners = listenerMap.get(object.getClass());
@@ -85,6 +88,7 @@ public class SimpleEventMulticaster {
 
     /**
      * 异步，无状态传播
+     *
      * @param object 需要传播的事件
      */
     public void asyncMulticast(Object object) {
@@ -99,8 +103,9 @@ public class SimpleEventMulticaster {
 
     /**
      * 异步，有状态传播
+     *
      * @param object 需要传播的事件
-     * @param state 状态码
+     * @param state  状态码
      */
     public void asyncMulticastWithState(Object object, int state) {
         List<SimpleListener> listeners = listenerMap.get(object.getClass());
