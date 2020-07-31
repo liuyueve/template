@@ -20,6 +20,3 @@ app:
     keepLiveSeconds: 10
   schedule:
     corePoolSize: 2
-mybatis-plus:
-  mapper-locations: classpath:mybatis/*.xml
-  type-handlers-package: com.haizhi.template.config.mybatis.typeHandlers

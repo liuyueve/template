@@ -1,6 +1,5 @@
 package com.haizhi.template;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.ApplicationPidFileWriter;
@@ -8,7 +7,6 @@ import org.springframework.boot.context.ApplicationPidFileWriter;
 import java.io.File;
 
 @SpringBootApplication
-@MapperScan("com.haizhi.template.mapper")
 public class Application {
 
     public static void main(String[] args) {
