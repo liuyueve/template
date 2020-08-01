@@ -7,7 +7,7 @@ import org.springframework.boot.context.ApplicationPidFileWriter;
 
 import java.io.File;
 
-@EntityScan("com.haizhi.template.bean")
+@EntityScan("com.haizhi.template.bean.entity")
 @SpringBootApplication
 public class Application {
 
