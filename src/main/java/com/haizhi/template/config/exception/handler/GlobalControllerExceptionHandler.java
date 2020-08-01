@@ -1,6 +1,6 @@
 package com.haizhi.template.config.exception.handler;
 
-import com.haizhi.template.bean.entityObject.ResultEntity;
+import com.haizhi.template.bean.vo.ResultVo;
 import com.haizhi.template.config.exception.CustomServerException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.FieldError;
@@ -26,7 +26,7 @@ public class GlobalControllerExceptionHandler {
      * 处理rest请求参数校验失败的异常
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResultEntity<Map<String, String>> paramValidate(MethodArgumentNotValidException e) {
+    public ResultVo<Map<String, String>> paramValidate(MethodArgumentNotValidException e) {
 
         Map<String, String> collect = e.getBindingResult()
                                        .getFieldErrors()
@@ -34,20 +34,20 @@ public class GlobalControllerExceptionHandler {
                                        .collect(Collectors.toMap(FieldError::getField,
                                                f -> f.getRejectedValue() + "~" + f.getDefaultMessage()));
 
-        return ResultEntity.<Map<String, String>>builder().code(-1)
-                                                          .msg("参数校验未通过")
-                                                          .data(collect)
-                                                          .build();
+        return ResultVo.<Map<String, String>>builder().code(-1)
+                                                      .msg("参数校验未通过")
+                                                      .data(collect)
+                                                      .build();
     }
 
     @ExceptionHandler(CustomServerException.class)
-    public ResultEntity<Object> serverException(CustomServerException e) {
+    public ResultVo<Object> serverException(CustomServerException e) {
         log.info("request error code [{}] msg[{}]", e.getCode(), e.getMessage());
-        return ResultEntity.builder()
-                           .code(e.getCode())
-                           .msg(e.getMessage())
-                           .data(e.getData())
-                           .build();
+        return ResultVo.builder()
+                       .code(e.getCode())
+                       .msg(e.getMessage())
+                       .data(e.getData())
+                       .build();
     }
 
     /**
@@ -55,11 +55,11 @@ public class GlobalControllerExceptionHandler {
      * （异常尽量定制处理，慎用Exception来捕捉）
      */
     @ExceptionHandler(Throwable.class)
-    public ResultEntity<String> exception(Throwable e) {
+    public ResultVo<String> exception(Throwable e) {
         log.error("system exception!", e);
-        return ResultEntity.<String>builder().code(-1)
-                                             .msg("failed")
-                                             .build();
+        return ResultVo.<String>builder().code(-1)
+                                         .msg("failed")
+                                         .build();
     }
 
 }
