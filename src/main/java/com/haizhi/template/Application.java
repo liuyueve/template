@@ -2,10 +2,12 @@ package com.haizhi.template;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 
 import java.io.File;
 
+@EntityScan("com.haizhi.template.bean")
 @SpringBootApplication
 public class Application {
 

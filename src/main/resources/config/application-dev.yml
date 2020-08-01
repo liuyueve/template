@@ -1,16 +1,30 @@
 spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: liuyu
   jpa:
     show-sql: true
-    database-platform: mysql
+    database: mysql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useTimezone=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 12345
+    type: com.zaxxer.hikari.HikariDataSource
     hikari:
       auto-commit: true
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/liuyu?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useTimezone=true&serverTimezone=Asia/Shanghai
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 12345
+      connection-timeout: 10000
+      idle-timeout: 180000
+      max-lifetime: 1800000
+      minimum-idle: 4
+      maximum-pool-size: 8
+      initialization-fail-timeout: 1
+      pool-name: Hikari-pool
+
 
 logging:
   config: classpath:config/logback-spring-dev.xml
