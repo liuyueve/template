@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 
-import java.io.File;
-
 @EntityScan("com.haizhi.template.bean.entity")
 @SpringBootApplication
 public class Application {
@@ -14,23 +12,14 @@ public class Application {
     public static void main(String[] args) {
         try {
             SpringApplication application = new SpringApplication(Application.class);
-            application.addListeners(new ApplicationPidFileWriter(getPidFile(args)));
+            application.addListeners(new ApplicationPidFileWriter());
             application.run(args);
         } catch (Exception e) {
+            System.out.println("fail key failllllllllll");
             e.printStackTrace();
             System.exit(1);
         }
-    }
-
-    private static File getPidFile(String[] args) {
-        String name = "application";
-        for (String s : args) {
-            if (s.contains("pid")) {
-                name = name +"_"+ s.substring(s.indexOf("=")+1);
-                break;
-            }
-        }
-        return new File(name+".pid");
+        System.out.println("start key successssssssss");
     }
 
 }
