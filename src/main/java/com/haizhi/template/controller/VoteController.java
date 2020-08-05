@@ -34,20 +34,20 @@ public class VoteController {
     @PostConstruct
     @Transactional
     public void test() {
-        SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
-
-//        voteRepository.save(vote);
-        System.out.println(entityManagerFactory instanceof SessionFactory);
-        System.out.println(entityManagerFactory.getClass());
-        Optional<Vote> byId = voteRepository.findById(1);
-        Vote one = voteRepository.getOne(1);
-        System.out.println(byId.get());
-        System.out.println("***************************");
-        System.out.println("***************************");
-        System.out.println("***************************");
-        System.out.println("***************************");
-        System.out.println("***************************");
-        System.out.println("***************************");
+//        SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+//
+////        voteRepository.save(vote);
+//        System.out.println(entityManagerFactory instanceof SessionFactory);
+//        System.out.println(entityManagerFactory.getClass());
+//        Optional<Vote> byId = voteRepository.findById(1);
+//        Vote one = voteRepository.getOne(1);
+//        System.out.println(byId.get());
+//        System.out.println("***************************");
+//        System.out.println("***************************");
+//        System.out.println("***************************");
+//        System.out.println("***************************");
+//        System.out.println("***************************");
+//        System.out.println("***************************");
     }
 
 

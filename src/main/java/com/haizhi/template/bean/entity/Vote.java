@@ -20,7 +20,7 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ColumnDefault("empty")
+    @ColumnDefault("'empty'")
     private String name;
 
     private LocalDateTime time;

@@ -3,7 +3,6 @@ spring:
     name: template
   profiles:
     active: dev
-
 server:
   port: 8080
 logging:
