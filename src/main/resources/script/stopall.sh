@@ -52,7 +52,6 @@ do
 
     done
     sleep 1
-    echo -ne '.'
     now=`date +%s`
 done
 
