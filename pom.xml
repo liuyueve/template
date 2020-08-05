@@ -58,13 +58,12 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
         </dependency>
-
+        <!--数据库文档自动生成插件-->
         <dependency>
             <groupId>cn.smallbun.screw</groupId>
             <artifactId>screw-core</artifactId>
             <version>1.0.4</version>
         </dependency>
-
         <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
