@@ -27,6 +27,5 @@ spring:
       initialization-fail-timeout: 1
       pool-name: Hikari-pool
 
-
 logging:
   config: classpath:config/logback-spring-dev.xml
