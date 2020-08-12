@@ -3,7 +3,11 @@ spring:
     name: template
   profiles:
     active: dev
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: liuyu
 server:
   port: 8080
 logging:
@@ -16,3 +20,6 @@ app:
     keepLiveSeconds: 10
   schedule:
     corePoolSize: 2
+mybatis-plus:
+  mapper-locations: classpath:mybatis/*.xml
+  type-handlers-package: com.haizhi.template.config.mybatis.typeHandlers

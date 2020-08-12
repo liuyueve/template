@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSessionListener;
  * Description is : 空listener，摆这儿做示范
  */
 @Slf4j
-//@WebListener
+@WebListener
 public class EmptyListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
