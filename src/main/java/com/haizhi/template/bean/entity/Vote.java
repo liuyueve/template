@@ -25,4 +25,6 @@ public class Vote {
 
     private Boolean flag;
 
+    private Integer integer;
+
 }

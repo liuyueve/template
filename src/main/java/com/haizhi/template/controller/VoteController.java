@@ -5,6 +5,7 @@ import com.haizhi.template.mapper.VoteRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.ejb.HibernateEntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;

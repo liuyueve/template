@@ -16,9 +16,9 @@ import javax.persistence.EntityManagerFactory;
 @EntityScan("com.haizhi.template.bean.entity")
 public class JpaConfig {
 
-    @Bean
-    public SessionFactory getSessionFactory(EntityManagerFactory entityManagerFactory){
-        return entityManagerFactory.unwrap(SessionFactory.class);
-    }
+//    @Bean
+//    public SessionFactory getSessionFactory(EntityManagerFactory entityManagerFactory){
+//        return entityManagerFactory.unwrap(SessionFactory.class);
+//    }
 
 }

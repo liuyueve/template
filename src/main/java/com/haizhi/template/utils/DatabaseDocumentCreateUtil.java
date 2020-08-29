@@ -23,7 +23,7 @@ public class DatabaseDocumentCreateUtil {
         //数据源
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/liuyu");
+        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test");
         hikariConfig.setUsername("root");
         hikariConfig.setPassword("12345");
         //设置可以获取tables remarks信息
