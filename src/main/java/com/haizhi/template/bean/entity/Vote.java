@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Create by liu·yu
@@ -25,6 +26,8 @@ public class Vote {
 
     private Boolean flag;
 
-    private Integer integer;
+    private Integer age;
+
+    private Date createTime;
 
 }
