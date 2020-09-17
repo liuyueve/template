@@ -1,12 +1,9 @@
 package com.haizhi.template.controller;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.net.URLEncoder;
 
 /**
  * Create by liu·yu
@@ -16,13 +13,12 @@ import java.net.URLEncoder;
 @RestController
 public class DownloadController {
 
-//    @GetMapping("download")
-//    public void download(HttpServletResponse response) throws IOException {
-//        File file = new File("/Users/liuyu/Desktop/刘宇周报.xlsx");
-//        response.setHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode("刘宇周报.xlsx", "UTF-8"));
-//        InputStream in = new FileInputStream(file);
-//        IOUtils.copy(in, response.getOutputStream());
-//        in.close();
-//    }
+    @Autowired
+    private DownloadService service;
+
+    @GetMapping(value = "test",produces = MediaType.TEXT_PLAIN_VALUE)
+    public String test(){
+        return service.download();
+    }
 
 }

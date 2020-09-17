@@ -10,6 +10,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -19,11 +20,11 @@ import java.util.ArrayList;
  */
 public class DatabaseDocumentCreateUtil {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         //数据源
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test");
+        hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/liuyu");
         hikariConfig.setUsername("root");
         hikariConfig.setPassword("12345");
         //设置可以获取tables remarks信息
@@ -31,14 +32,15 @@ public class DatabaseDocumentCreateUtil {
         hikariConfig.setMinimumIdle(2);
         hikariConfig.setMaximumPoolSize(5);
         DataSource dataSource = new HikariDataSource(hikariConfig);
-        //生成配置
+        System.out.println(dataSource.getConnection().getSchema());
+//        //生成配置
         EngineConfig engineConfig = EngineConfig.builder()
                                                 //生成文件路径
                                                 .fileOutputDir("/Users/liuyu/Desktop/")
                                                 //打开目录
                                                 .openOutputDir(true)
                                                 //文件类型
-                                                .fileType(EngineFileType.HTML)
+                                                .fileType(EngineFileType.MD)
                                                 //生成模板实现
                                                 .produceType(EngineTemplateType.freemarker)
                                                 //自定义文件名称
